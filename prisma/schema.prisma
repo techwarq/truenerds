@@ -1,28 +1,25 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider     = "mysql"
+  provider     = "mongodb"
   url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
 
 model Account {
-  id                String  @id @default(cuid())
-  userId            String
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @db.ObjectId
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
+  refresh_token     String?
+  access_token      String?
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @db.Text
+  id_token          String?
   session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -31,20 +28,96 @@ model Account {
 }
 
 model Session {
-  id           String   @id @default(cuid())
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
   sessionToken String   @unique
-  userId       String
+  userId       String   @db.ObjectId
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
+  id              String         @id @default(auto()) @map("_id") @db.ObjectId
+  name            String?
+  email           String?        @unique
+  emailVerified   DateTime?
+  username        String?        @unique
+  image           String?
+  accounts        Account[]
+  sessions        Session[]
+  subnerdsCreated Subnerds[]     @relation("CreatedBy")
+  posts           Post[]
+  subscriptions   Subscription[]
+  comments        Comment[]
+  commentVotes    CommentVote[]
+  votes           Vote[]
+}
 
-  image    String?
-  accounts Account[]
-  sessions Session[]
+model Subnerds {
+  id          String         @id @default(auto()) @map("_id") @db.ObjectId
+  name        String         @unique
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  posts       Post[]
+  creatorId   String?        @db.ObjectId
+  Creator     User?          @relation("CreatedBy", fields: [creatorId], references: [id])
+  subscribers Subscription[]
+}
+
+model Post {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  title      String
+  content    Json?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  authorId   String    @db.ObjectId
+  author     User      @relation(fields: [authorId], references: [id])
+  subnerdsId String    @db.ObjectId
+  subnerds   Subnerds  @relation(fields: [subnerdsId], references: [id])
+  comments   Comment[]
+  votes      Vote[]
+}
+
+model Subscription {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId     String   @db.ObjectId
+  user       User     @relation(fields: [userId], references: [id])
+  subnerdsId String   @db.ObjectId
+  subnerds   Subnerds @relation(fields: [subnerdsId], references: [id])
+}
+
+model Comment {
+  id        String        @id @default(auto()) @map("_id") @db.ObjectId
+  text      String
+  createdAt DateTime      @default(now())
+  authorId  String        @db.ObjectId
+  author    User          @relation(fields: [authorId], references: [id])
+  postId    String        @db.ObjectId
+  post      Post          @relation(fields: [postId], references: [id], onDelete: Cascade)
+  replyToId String?       @db.ObjectId
+  replyTo   Comment?      @relation("ReplyTo", fields: [replyToId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  replies   Comment[]     @relation("ReplyTo")
+  votes     CommentVote[]
+}
+
+enum VoteType {
+  UP
+  DOWN
+}
+
+model CommentVote {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @db.ObjectId
+  user      User     @relation(fields: [userId], references: [id])
+  commentId String   @db.ObjectId
+  comment   Comment  @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  type      VoteType
+}
+
+model Vote {
+  id     String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId String   @db.ObjectId
+  user   User     @relation(fields: [userId], references: [id])
+  postId String   @db.ObjectId
+  post   Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  type   VoteType
 }
