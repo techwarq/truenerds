@@ -9,7 +9,7 @@ import TextareaAutosize from 'react-textarea-autosize'
 import { z } from 'zod'
 
 import { toast } from '@/hooks/use-toast'
-import { uploadFiles } from '@/lib/uploadthing'
+import { uploadFiles  } from '@/lib/uploadthing'
 import { PostCreationRequest, PostValidator } from '@/lib/validators/post'
 import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
@@ -104,14 +104,15 @@ export const Editor: React.FC<EditorProps> = ({ subnerdsId }) => {
             config: {
               uploader: {
                 async uploadByFile(file: File) {
-                  const res = await uploadFiles([file], 'imageUploader');
-                  console.log('upload Response', res);
+                  // upload to uploadthing
+                  const [res] = await uploadFiles([file], 'imageUploader')
+
                   return {
                     success: 1,
                     file: {
-                      url: res.filesUrl,
+                      url: res.url,
                     },
-                  };
+                  }
                 },
               },
             },

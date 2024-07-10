@@ -111,6 +111,7 @@ model CommentVote {
   commentId String   @db.ObjectId
   comment   Comment  @relation(fields: [commentId], references: [id], onDelete: Cascade)
   type      VoteType
+  @@unique([commentId, userId])
 }
 
 model Vote {
