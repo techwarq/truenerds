@@ -26,11 +26,12 @@ const CreateComment: FC<CreateCommentProps> = ({ postId, replyToId }) => {
     mutationFn: async ({ postId, text, replyToId }: CommentRequest) => {
       const payload: CommentRequest = { postId, text, replyToId }
 
-      const { data } = await axios.patch(
+      const { data } = await axios.post(
         `/api/subnerds/post/comment/`,
         payload
       )
       return data
+      
     },
 
     onError: (err) => {

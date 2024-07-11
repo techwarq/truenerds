@@ -8,6 +8,7 @@ type ExtendedComment = Comment & {
   votes: CommentVote[]
   author: User
   replies: ReplyComment[]
+  text: String
 }
 
 type ReplyComment = Comment & {
@@ -31,6 +32,7 @@ const CommentsSection = async ({ postId }: CommentsSectionProps) => {
     include: {
       author: true,
       votes: true,
+      
       replies: {
         // first level replies
         include: {
@@ -41,7 +43,7 @@ const CommentsSection = async ({ postId }: CommentsSectionProps) => {
     },
     
   })
-
+  console.log('Fetched comments:', comments);
   return (
     <div className='flex flex-col gap-y-4 mt-4'>
       <hr className='w-full bg-slate-500 h-px my-6' />

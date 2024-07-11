@@ -17,12 +17,12 @@ export default function RootLayout({
   
 }) {
   return (
-    <html lang='en' className={cn('bg-white text-slate-900 antialiased', inter.className)}>
+    <html lang='en' className={cn(' text-slate-900 antialiased', inter.className)}>
       <body className='min-h-screen pt-2 bg-slate-50 antialiased'>
         <Providers>
         <Navbar />
         
-        <div className='containter max-w-7xl mx-auto h-full pt-12'>  {children}
+        <div className=' container max-w-screen mx-auto h-full pt-12 bg-slate-400'>  {children}
 
         </div>
       

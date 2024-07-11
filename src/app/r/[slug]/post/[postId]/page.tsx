@@ -38,8 +38,13 @@ const SubRedditPostPage = async ({ params }: SubnerdsPostPageProps) => {
       },
     })
   }
+  console.log('post:', post);
+console.log('cachedPost:', cachedPost);
 
-  if (!post && !cachedPost) return notFound()
+  if (!post && !cachedPost){
+    console.log('Post not found or cachedPost not available');
+  return null;
+  }
 
   return (
     <div>

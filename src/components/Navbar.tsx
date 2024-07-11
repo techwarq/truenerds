@@ -3,6 +3,7 @@ import { Icons } from "./ui/Icons"
 import { buttonVariants } from "./ui/Button"
 import {getAuthSession} from '@/lib/auth'
 import { UserAccountNav } from "./UserAccountNav"
+import SearchBar from "./SearchBar"
 
 const Navbar = async () => {
     const session = await getAuthSession()
@@ -11,8 +12,10 @@ const Navbar = async () => {
             <div className="container max-w-7xl h-full mx-auto flex items-center justify-between gap-2">
                 <Link href='/' className="flex gap-2 items-center" >
                 <Icons.logo className="h-8 w-8 sm:h-6 sm:w-6" />
-                <p className="hidden text-zinc-700 text-md font-bold  md:block">truenerds</p>
+                <p className="hidden text-zinc-700 text-lg font-bold  md:block"><span className=" text-purple-700">true</span>nerds</p>
                 </Link>
+
+                <SearchBar />
 
                 {session?.user ? (
           <UserAccountNav user={session.user} />

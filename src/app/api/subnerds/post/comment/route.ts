@@ -15,7 +15,6 @@ export async function PATCH(req: Request) {
       return new Response('Unauthorized', { status: 401 })
     }
 
-    // if no existing vote, create a new vote
     await db.comment.create({
       data: {
         text,
@@ -25,14 +24,15 @@ export async function PATCH(req: Request) {
       },
     })
 
-    return new Response('OK')
+    return new Response('Comment created successfully', { status: 200 })
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return new Response(error.message, { status: 400 })
+      return new Response(`Validation error: ${error.message}`, { status: 400 })
     }
 
+    console.error('Error creating comment:', error)
     return new Response(
-      'Could not post to subreddit at this time. Please try later',
+      'Could not create comment at this time. Please try again later.',
       { status: 500 }
     )
   }

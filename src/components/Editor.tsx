@@ -1,5 +1,4 @@
 'use client'
-
 import EditorJS from '@editorjs/editorjs'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { usePathname, useRouter } from 'next/navigation'
@@ -9,7 +8,7 @@ import TextareaAutosize from 'react-textarea-autosize'
 import { z } from 'zod'
 
 import { toast } from '@/hooks/use-toast'
-import { uploadFiles  } from '@/lib/uploadthing'
+import { uploadFiles } from '@/lib/uploadthing'
 import { PostCreationRequest, PostValidator } from '@/lib/validators/post'
 import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
@@ -42,11 +41,7 @@ export const Editor: React.FC<EditorProps> = ({ subnerdsId }) => {
   const pathname = usePathname()
 
   const { mutate: createPost } = useMutation({
-    mutationFn: async ({
-      title,
-      content,
-      subnerdsId,
-    }: PostCreationRequest) => {
+    mutationFn: async ({ title, content, subnerdsId }: PostCreationRequest) => {
       const payload: PostCreationRequest = { title, content, subnerdsId }
       const { data } = await axios.post('/api/subnerds/post/create', payload)
       return data
@@ -103,14 +98,21 @@ export const Editor: React.FC<EditorProps> = ({ subnerdsId }) => {
             class: ImageTool,
             config: {
               uploader: {
-                async uploadByFile(file: File) {
-                  // upload to uploadthing
-                  const [res] = await uploadFiles([file], 'imageUploader')
-
+                uploadByFile: async (file: File) => {
+                  const response = await uploadFiles("imageUploader", { files: [file] })
                   return {
                     success: 1,
                     file: {
-                      url: res.url,
+                      url: response[0].url,
+                    },
+                  }
+                },
+                uploadByUrl: async (url: string) => {
+                  // If you want to handle uploading by URL
+                  return {
+                    success: 1,
+                    file: {
+                      url,
                     },
                   }
                 },
