@@ -4,11 +4,11 @@ import UserAuthForm from "./UserAuthForm"
 
 const SignIn = () =>{
     return(
-        <div className="container mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[400px]">
-            <div className="flex flex-col space-y-2 text-center">
+        <div className="container mx-auto  flex w-full flex-col justify-center space-y-6 sm:w-[400px]">
+            <div className="flex flex-col  space-y-2 text-center">
                 <Icons.logo className="mx-auto h-6 w-6"  />
-                <h1 className="text-2xl font-semibold tracking-tight">welcome back</h1>
-                <p className="text-sm max-w-xs mx-auto">
+                <h1 className="text-2xl text-green-600 font-semibold tracking-tight">welcome back</h1>
+                <p className="text-sm text-green-600 max-w-xs mx-auto">
                     By continuing, you are setting up a truenerds account and agree to our User Agreement and Privacy Policy.
                 </p>
                 <UserAuthForm />
