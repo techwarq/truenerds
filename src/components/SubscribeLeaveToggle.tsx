@@ -29,7 +29,7 @@ const SubscribeLeaveToggle = ({
         subnerdsId,
       }
 
-      const { data } = await axios.post('/api/subreddit/subscribe', payload)
+      const { data } = await axios.post('/api/subnerds/subscribe', payload)
       return data as string
     },
     onError: (err) => {
