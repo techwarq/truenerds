@@ -203,7 +203,7 @@ export const Editor: React.FC<EditorProps> = ({ subnerdsId }) => {
             className='w-full resize-none appearance-none overflow-hidden bg-transparent text-5xl font-bold focus:outline-none'
           />
           <div id='editor' className='min-h-[500px]' />
-          <p className='text-sm text-gray-500'>
+          <p className='text-sm text-white'>
             Use{' '}
             <kbd className='rounded-md border bg-muted px-1 text-xs uppercase'>
               Tab
