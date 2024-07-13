@@ -32,7 +32,7 @@ const Post: FC<PostProps> = ({
   const pRef = useRef<HTMLParagraphElement>(null)
 
   return (
-    <div className='rounded-lg bg-white shadow'>
+    <div className='rounded-xl bg-white/20 shadow'>
       <div className='px-6 py-4 flex justify-between'>
         <PostVoteClient
           postId={post.id}
@@ -41,13 +41,13 @@ const Post: FC<PostProps> = ({
         />
 
         <div className='w-0 flex-1'>
-          <div className='max-h-40 mt-1 text-xs text-gray-500'>
+          <div className='max-h-40 mt-1 text-xs text-white'>
             {subredditName ? (
               <>
                 <a
-                  className='underline text-zinc-900 text-sm underline-offset-2'
-                  href={`/r/${subredditName}`}>
-                  r/{subredditName}
+                  className='underline text-white text-sm underline-offset-2'
+                  href={`/n/${subredditName}`}>
+                  n/{subredditName}
                 </a>
                 <span className='px-1'>•</span>
               </>
@@ -55,8 +55,8 @@ const Post: FC<PostProps> = ({
             <span>Posted by u/{post.author.username}</span>{' '}
             {formatTimeToNow(new Date(post.createdAt))}
           </div>
-          <a href={`/r/${subredditName}/post/${post.id}`}>
-            <h1 className='text-lg font-semibold py-2 leading-6 text-gray-900'>
+          <a href={`/n/${subredditName}/post/${post.id}`}>
+            <h1 className='text-lg font-semibold py-2 leading-6 text-white'>
               {post.title}
             </h1>
           </a>
@@ -73,9 +73,9 @@ const Post: FC<PostProps> = ({
         </div>
       </div>
 
-      <div className=' bg-gray-50 rounded-lg z-20 text-sm px-4 py-4 sm:px-6'>
+      <div className=' text-white rounded-lg z-20 text-sm px-4 py-4 sm:px-6'>
         <Link
-          href={`/r/${subredditName}/post/${post.id}`}
+          href={`/n/${subredditName}/post/${post.id}`}
           className='w-fit flex items-center gap-2'>
           <MessageSquare className='h-4 w-4' /> {commentAmt} comments
         </Link>

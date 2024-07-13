@@ -1,10 +1,11 @@
 import { LucideProps, MessageSquare, User } from "lucide-react";
 import { Globe } from 'lucide-react';
 import { Brain } from 'lucide-react';
+import { Telescope } from 'lucide-react';
 export const Icons = {
   user: User,
     logo: (props: LucideProps) => (
-      <Brain />
+      <Telescope />
 
 
   ),

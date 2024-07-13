@@ -10,6 +10,11 @@ export default async function Home() {
   return(
     <>
     <h1 className='font-bold text-3xl text-green-500 md:text-4xl mt-5'>Your feed</h1>
+    <a
+                  className='underline text-green-600 text-sm underline-offset-2'
+                  href={`/n/science`}>
+                  Join the test group n/science
+                </a>
       <div className='grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-4 py-6 '>
        
         
@@ -34,7 +39,7 @@ export default async function Home() {
               className={buttonVariants({
                 className: 'w-full mt-4 mb-6',
               })}
-              href={`/r/create`}>
+              href={`/n/create`}>
               Create Community
             </Link>
 

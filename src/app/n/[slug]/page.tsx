@@ -39,7 +39,7 @@ const page = async ({ params }: PageProps) => {
 
   return (
     <>
-      <h1 className='font-bold text-3xl md:text-4xl h-14'>
+      <h1 className='font-bold text-green-600 text-3xl md:text-4xl h-14'>
         n/{subreddit.name}
       </h1>
       <MiniCreatePost session={session} />
