@@ -62,7 +62,7 @@ const Post: FC<PostProps> = ({
           </a>
 
           <div
-            className='relative text-sm max-h-40 w-full overflow-clip '
+            className='relative text-sm text-white max-h-40 w-full overflow-clip '
             ref={pRef}>
             <EditorOutput content={post.content} />
             {pRef.current?.clientHeight === 160 ? (

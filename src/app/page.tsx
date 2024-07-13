@@ -15,6 +15,7 @@ export default async function Home() {
                   href={`/n/science`}>
                   Join the test group n/science
                 </a>
+                
       <div className='grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-4 py-6 '>
        
         
@@ -42,6 +43,14 @@ export default async function Home() {
               href={`/n/create`}>
               Create Community
             </Link>
+            <Link
+              className={buttonVariants({
+                className: 'w-full mt-2 mb-6 ',
+              })}
+              href={`https://shorturl.at/cWztC`}>
+              Subscribe to Newsletter
+            </Link>
+            
 
             
           </dl>
