@@ -78,7 +78,7 @@
   @layer components {
     /* main */
     .main-container {
-      @apply flex min-h-screen flex-1 flex-col items-center bg-stone-900 px-6 pb-10 pt-28 max-md:pb-32 sm:px-10;
+      @apply flex min-h-screen flex-1 flex-col items-center bg-stone-900 px-6 pb-10 pt-20 max-md:pb-32 sm:px-10;
     }
 
     .leftsidebar {
@@ -88,7 +88,7 @@
       @apply relative flex justify-start gap-4 rounded-lg p-4;
     }
     .bottombar {
-      @apply fixed bottom-0 z-10 w-full rounded-t-3xl bg-stone-900 p-4   md:hidden;
+      @apply fixed bottom-0 z-10 w-full rounded-t-3xl bg-stone-600 p-4   md:hidden;
     }
     .bottombar_container {
       @apply flex items-center justify-between gap-3 ;

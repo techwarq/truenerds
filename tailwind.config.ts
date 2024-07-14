@@ -74,6 +74,7 @@ const config = {
       },
       screens: {
         xs: "400px",
+        sm: "600px"
       },
     },
   },
