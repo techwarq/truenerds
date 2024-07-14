@@ -82,9 +82,9 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
       {...props}>
       <Card>
         <CardHeader>
-          <CardTitle>Your username</CardTitle>
+          <CardTitle>Your nerd Name</CardTitle>
           <CardDescription>
-            Please enter a display name you are comfortable with.
+            Please enter a display name that describes you!
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -106,6 +106,9 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
             )}
           </div>
         </CardContent>
+        
+        
+        
         <CardFooter>
           <Button >Change name</Button>
         </CardFooter>
