@@ -31,7 +31,7 @@ const EditorOutput: FC<EditorOutputProps> = ({ content }) => {
     
     <Output
       style={style}
-      className='text-sm'
+      className='text-sm text-white'
       renderers={renderers}
       data={content}
     />

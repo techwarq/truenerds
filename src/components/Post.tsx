@@ -32,7 +32,7 @@ const Post: FC<PostProps> = ({
   const pRef = useRef<HTMLParagraphElement>(null)
 
   return (
-    <div className='rounded-xl bg-white/20 shadow'>
+    <div className='rounded-xl bg-white/20 shadow '>
       <div className='px-6 py-4 flex justify-between'>
         <PostVoteClient
           postId={post.id}
@@ -67,7 +67,7 @@ const Post: FC<PostProps> = ({
             <EditorOutput content={post.content} />
             {pRef.current?.clientHeight === 160 ? (
               // blur bottom if content is too long
-              <div className='absolute bottom-0 left-0 h-24 w-full bg-gradient-to-t from-white to-transparent'></div>
+              <div className='absolute bottom-0 left-0 h-24 w-full bg-gradient-to-t from-stone-600 to-transparent'></div>
             ) : null}
           </div>
         </div>

@@ -1,9 +1,11 @@
 import Bottombar from '@/components/Bottombar'
+import LeftSidebar from '@/components/LeftSidebar'
 import Navbar from '@/components/Navbar'
 import Providers from '@/components/Providers'
 import { Toaster } from '@/components/ui/toaster'
 import { cn } from '@/lib/utils'
 import '@/styles/globals.css'
+
 import {Inter, Roboto_Mono} from "next/font/google"
 export const metadata = {
   title: 'truenerds',
@@ -24,9 +26,16 @@ export default function RootLayout({
         <Providers>
         <Navbar />
         
+        <main className='flex flex-row'>
+            <LeftSidebar />
+        <section className='main-container'>
         <div className=' container max-w-screen mx-auto h-full pt-12 '>  {children}
 
         </div>
+        </section>
+        </main>
+
+        <Bottombar />
       
         <Toaster />
        
