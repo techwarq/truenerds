@@ -28,7 +28,7 @@ export default async function Home() {
               Home
             </p>
           </div>
-          <dl className='-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6'>
+          <dl className='-my-3 divide-y divide-gray-100 bg-stone-900 px-6 py-4 text-sm leading-6'>
             <div className='flex justify-between gap-x-4 py-3'>
               <p className='text-white'>
                 Your personal truenerds frontpage. Come here to check in with your
@@ -45,7 +45,7 @@ export default async function Home() {
             </Link>
             <Link
               className={buttonVariants({
-                className: 'w-full mt-2 mb-6 ',
+                className: 'w-full mt-1 mb-6 ',
               })}
               href={`https://shorturl.at/cWztC`}>
               Subscribe to Newsletter

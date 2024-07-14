@@ -20,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en' className={cn(' text-slate-900 antialiased', robotoMono.className)}>
-      <body className='min-h-screen pt-2 bg-black antialiased'>
+      <body className='min-h-screen pt-2 bg-stone-900 antialiased'>
         <Providers>
         <Navbar />
         
