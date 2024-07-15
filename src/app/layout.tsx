@@ -5,6 +5,7 @@ import Providers from '@/components/Providers'
 import { Toaster } from '@/components/ui/toaster'
 import { cn } from '@/lib/utils'
 import '@/styles/globals.css'
+import { Analytics } from "@vercel/analytics/react"
 
 import {Inter, Roboto_Mono} from "next/font/google"
 export const metadata = {
@@ -38,6 +39,7 @@ export default function RootLayout({
         <Bottombar />
       
         <Toaster />
+        <Analytics />
        
 
         </Providers>
