@@ -186,7 +186,7 @@ export const Editor: React.FC<EditorProps> = ({ subnerdsId }) => {
   const { ref: titleRef, ...rest } = register('title')
 
   return (
-    <div className='w-full p-4 bg-white/20 text-white rounded-lg border border-zinc-200'>
+    <div className='w-full p-4 bg-white/20  text-white rounded-lg border border-zinc-200'>
       <form
         id='subreddit-post-form'
         className='w-fit'
@@ -200,7 +200,7 @@ export const Editor: React.FC<EditorProps> = ({ subnerdsId }) => {
             }}
             {...rest}
             placeholder='Title'
-            className='w-full resize-none appearance-none overflow-hidden bg-transparent text-5xl font-bold focus:outline-none'
+            className='w-full text-white resize-none appearance-none overflow-hidden bg-transparent text-5xl font-bold focus:outline-none'
           />
           <div id='editor' className='min-h-[500px]' />
           <p className='text-sm text-white'>
