@@ -9,7 +9,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ReactNode } from 'react'
 
-export async function Page({
+export default async function CommunitiesPage({
   children,
   params: { slug },
 }: {
