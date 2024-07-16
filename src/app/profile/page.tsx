@@ -4,6 +4,10 @@ import { db } from '@/lib/db';
 import { UserAvatar } from '@/components/UserAvatar';
 import { INFINITE_SCROLL_PAGINATION_RESULTS } from '@/config';
 import Post from '@/components/Post';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { profileTabs } from "@/contants";
+import Image from 'next/image';
+
 
 interface ProfileProps {
   params: { username: string }
@@ -55,6 +59,25 @@ export default async function ProfilePage({ params: { username } }: ProfileProps
             <p className='text-base-medium text-gray-1'>{user.username}</p>
           </div>
         </div>
+      </div>
+      <div className='mt-9'>
+        <Tabs defaultValue='posts' className='w-full'>
+            <TabsList className='tab'>
+                {profileTabs.map((tab) =>(
+                    <TabsTrigger key={tab.label} value={tab.value} className='tab'>
+                        <Image src={tab.icon} alt={tab.label}
+                        width={24}
+                        height={24}
+                        className='object-contain'/>
+
+                        <p className='max-sm:hidden'>{tab.label}</p>
+                        
+
+                    </TabsTrigger>
+                ))}
+
+            </TabsList>
+        </Tabs>
       </div>
 
       <div className='mt-4'>
