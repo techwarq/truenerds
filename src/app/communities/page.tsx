@@ -9,13 +9,11 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ReactNode } from 'react'
 
-export default async function CommunitiesPage({
-  children,
-  params: { slug },
-}: {
-  children: ReactNode
+interface PageProps {
   params: { slug: string }
-}) {
+}
+
+export default async function CommunitiesPage({ params: { slug } }: PageProps) {
   const session = await getAuthSession()
 
   const subreddit = await db.subnerds.findFirst({
@@ -47,8 +45,6 @@ export default async function CommunitiesPage({
 
   const isSubscribed = !!subscription
 
-  if (!subreddit) return notFound()
-
   const memberCount = await db.subscription.count({
     where: {
       subnerds: {
@@ -62,7 +58,7 @@ export default async function CommunitiesPage({
       <div className='sm:container max-w-7xl mx-auto h-full pt-12'>
         <div>
           <div className='grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-4 py-6'>
-            <ul className='flex flex-col space-y-6'>{children}</ul>
+            <ul className='flex flex-col space-y-6'>{/* Children content will be passed by layout */}</ul>
 
             {/* info sidebar */}
             <div className='overflow-hidden h-fit rounded-lg border border-gray-200 order-first md:order-last'>
