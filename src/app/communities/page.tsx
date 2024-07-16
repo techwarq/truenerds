@@ -1,5 +1,4 @@
 import React from 'react'
-
 import SubscribeLeaveToggle from '@/components/SubscribeLeaveToggle'
 import { buttonVariants } from '@/components/ui/Button'
 import { getAuthSession } from '@/lib/auth'
@@ -10,69 +9,63 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ReactNode } from 'react'
 
+export async function Page({
+  children,
+  params: { slug },
+}: {
+  children: ReactNode
+  params: { slug: string }
+}) {
+  const session = await getAuthSession()
 
-const Page = async ({
-    children,
-    params: { slug },
-  }: {
-    children: ReactNode
-    params: { slug: string }
-  }) => {
-    const session = await getAuthSession()
-  
-    const subreddit = await db.subnerds.findFirst({
-      where: { name: slug },
-      include: {
-        posts: {
-          include: {
-            author: true,
-            votes: true,
-          },
+  const subreddit = await db.subnerds.findFirst({
+    where: { name: slug },
+    include: {
+      posts: {
+        include: {
+          author: true,
+          votes: true,
         },
       },
-    })
-  
-   
-   
-  
-    if (!subreddit) return notFound()
-  
-      const subscription = !session?.user
-      ? undefined
-      : await db.subscription.findFirst({
-          where: {
-            subnerds: {
-              name: slug,
-            },
-            user: {
-              id: session.user.id,
-            },
+    },
+  })
+
+  if (!subreddit) return notFound()
+
+  const subscription = !session?.user
+    ? undefined
+    : await db.subscription.findFirst({
+        where: {
+          subnerds: {
+            name: slug,
           },
-        })
-  
-    const isSubscribed = !!subscription
-  
-    if (!subreddit) return notFound()
-  
-    const memberCount = await db.subscription.count({
-      where: {
-        subnerds: {
-          name: slug,
+          user: {
+            id: session.user.id,
+          },
         },
+      })
+
+  const isSubscribed = !!subscription
+
+  if (!subreddit) return notFound()
+
+  const memberCount = await db.subscription.count({
+    where: {
+      subnerds: {
+        name: slug,
       },
-    })
-  
-    return (
-        <div className='flex justify-center items-center h-screen'>
+    },
+  })
+
+  return (
+    <div className='flex justify-center items-center h-screen'>
       <div className='sm:container max-w-7xl mx-auto h-full pt-12'>
         <div>
-    
-  
           <div className='grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-4 py-6'>
             <ul className='flex flex-col space-y-6'>{children}</ul>
-  
+
             {/* info sidebar */}
-            <div className='overflow-hidden h-fit  rounded-lg border border-gray-200 order-first md:order-last'>
+            <div className='overflow-hidden h-fit rounded-lg border border-gray-200 order-first md:order-last'>
               <div className='px-6 py-4'>
                 <p className='font-semibold py-3 text-green-600'> n/{subreddit.name}</p>
               </div>
@@ -96,16 +89,15 @@ const Page = async ({
                     <dt className='text-gray-500'>You created this community</dt>
                   </div>
                 ) : null}
-  
-  {subreddit.creatorId !== session?.user?.id ? (
+
+                {subreddit.creatorId !== session?.user?.id ? (
                   <SubscribeLeaveToggle
                     isSubscribed={isSubscribed}
                     subnerdsId={subreddit.id}
                     subnerdsName={subreddit.name}
                   />
                 ) : null}
-  
-               
+
                 <Link
                   className={buttonVariants({
                     variant: 'outline',
@@ -115,19 +107,17 @@ const Page = async ({
                   Create Post
                 </Link>
                 <Link
-              className={buttonVariants({
-                className: 'w-full mt-4 mb-6',
-              })}
-              href={`/n/create`}>
-              Create Community
-            </Link>
+                  className={buttonVariants({
+                    className: 'w-full mt-4 mb-6',
+                  })}
+                  href={`/n/create`}>
+                  Create Community
+                </Link>
               </dl>
             </div>
           </div>
         </div>
       </div>
-      </div>
-    )
-  }
-
-export default Page
+    </div>
+  )
+}
