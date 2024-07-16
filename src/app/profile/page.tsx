@@ -1,67 +1,56 @@
+
 import { redirect } from 'next/navigation';
-import { getAuthSession } from '@/lib/auth';
+import { authOptions, getAuthSession } from '@/lib/auth';
 import UserActivities from '@/components/UserActivities';
 import { db } from '@/lib/db';
-import { User, Subnerds } from '@prisma/client';
 
-interface PageProps {
-  params: {
-    slug: string;
-  };
-}
 
-export default async function ProfilePage({ params }: PageProps) {
-  const { slug } = params;
 
-  try {
-    const session = await getAuthSession();
+import Link from 'next/link'
+import { User } from 'next-auth'
+import { UserAvatar } from '../../components/UserAvatar'
+
+interface ProfileProps extends React.HTMLAttributes<HTMLDivElement> {
+    user: Pick<User, 'name' | 'image' | 'email'>
+    params: {username: string}
+  }
+
+
+export default async function ProfilePage({params: {username}}: ProfileProps) {
+    const session = await getAuthSession()
 
     if (!session?.user) {
-      redirect('/login');
-    }
+        redirect(authOptions?.pages?.signIn || '/login')
+      }
+    
 
-    // Fetch user details
-    const user = await db.user.findUnique({
-      where: {
-        id: session.user.id,
-      },
-    });
+    const User = await db.user.findFirst({
+        where : {username},
+        
+    })
+ 
 
-    if (!user) {
-      throw new Error('User not found');
-    }
 
-    // Fetch subnerds data based on slug
-    const subnerds = await db.subnerds.findUnique({
-      where: {
-        name: slug,
-      },
-    });
+    
 
-    if (!subnerds) {
-      return (
-        <div className='max-w-4xl mx-auto py-12'>
-          <p>Subnerds not found.</p>
-        </div>
-      );
-    }
+  
 
     return (
-      <div className='max-w-4xl mx-auto py-12'>
-        <div className='grid items-start gap-8'>
-          <h1 className='font-bold text-3xl text-green-600 md:text-4xl'>Settings</h1>
-          <div className='grid gap-10'>
-            <UserActivities user={user as User & { username: string }} subnerds={subnerds as Subnerds & { name: string }} />
+      <div className='flex w-full flex-col justify-start'>
+        <div className='flex items-center justify-between'>
+            <div className='flex items-center gap-3'>
+                <div className='relative '>
+              
+                </div>
+                <div className='flex-1'>
+            <h2 className='text-left text-heading3-bold text-light-1'>
+              
+            </h2>
+            <p className='text-base-medium text-gray-1'>{User?.username}</p>
           </div>
+            </div>
         </div>
       </div>
     );
-  } catch (error) {
-    console.error('Error fetching data:', error);
-    return (
-      <div className='max-w-4xl mx-auto py-12'>
-        <p>Error fetching data. Please try again later.</p>
-      </div>
-    );
-  }
+  
 }
