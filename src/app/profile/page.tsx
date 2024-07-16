@@ -71,7 +71,9 @@ export default async function ProfilePage({ params: { username } }: ProfileProps
                         className='object-contain'/>
 
                         <p className='max-sm:hidden'>{tab.label}</p>
-                        
+                        {tab.label === 'Posts' &&(
+                            <p className='ml-1 rounded-sm bg-light-4 px-2 py-1 !text-tiny-medium text-green-600'>{user.posts.length }</p>
+                        )}
 
                     </TabsTrigger>
                 ))}
