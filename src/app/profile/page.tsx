@@ -17,7 +17,7 @@ export default async function ProfilePage({ params: { username } }: ProfileProps
   }
 
   const user = await db.user.findFirst({
-    where: { username },
+    where: { id: session.user.id },
     include: {
       posts: {
         include: {
