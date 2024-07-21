@@ -8,7 +8,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { profileTabs } from "@/contants";
 import Image from 'next/image';
 
-
 interface ProfileProps {
   params: { username: string }
 }
@@ -83,26 +82,26 @@ export default async function ProfilePage({ params: { username } }: ProfileProps
       </div>
 
       <div className='mt-4 w-full'>
-  <h3 className='text-heading3-bold text-light-1'>Posts</h3>
-  {user.posts.length ? (
-    <ul className='mt-4 space-y-4 w-full'>
-      {user.posts.map((post) => (
-        <li key={post.id} className='mb-4 w-full'>
-          <div className='w-full max-w-[600px] mx-auto'>
-            <Post
-              post={post}
-              votesAmt={post.votes.length}
-              subredditName={post.subnerds.name}
-              commentAmt={post.comments.length}
-            />
-          </div>
-        </li>
-      ))}
-    </ul>
-  ) : (
-    <p className='text-base-medium text-gray-1'>No posts found.</p>
-  )}
-</div>
+        <h3 className='text-heading3-bold text-light-1'>Posts</h3>
+        {user.posts.length ? (
+          <ul className='mt-4 space-y-4 w-full'>
+            {user.posts.map((post) => (
+              <li key={post.id} className='w-full'>
+                <div className='w-full lg:max-w-[550px] mx-auto'>
+                  <Post
+                    post={post}
+                    votesAmt={post.votes.length}
+                    subredditName={post.subnerds.name}
+                    commentAmt={post.comments.length}
+                  />
+                </div>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className='text-base-medium text-gray-1'>No posts found.</p>
+        )}
+      </div>
     </div>
   );
 }
