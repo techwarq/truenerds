@@ -82,7 +82,7 @@ export default async function ProfilePage({ params: { username } }: ProfileProps
         </Tabs>
       </div>
 
-      <div className='mt-4'>
+      <div className='mt-4 container'>
         <h3 className='text-heading3-bold text-light-1'>Posts</h3>
         {user.posts.length ? (
           <ul className='mt-4'>
