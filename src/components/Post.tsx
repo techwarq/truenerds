@@ -8,7 +8,6 @@ import { FC, useRef } from 'react'
 import EditorOutput from './EditorOutput'
 import PostVoteClient from './post-vote/PostVoteClient'
 
-
 type PartialVote = Pick<Vote, 'type'>
 
 interface PostProps {
@@ -32,7 +31,7 @@ const Post: FC<PostProps> = ({
   const pRef = useRef<HTMLParagraphElement>(null)
 
   return (
-    <div className='rounded-xl bg-white/20 shadow sm:max-w-screen sm:w-full'>
+    <div className='rounded-xl bg-white/20 shadow mx-auto w-full lg:max-w-[750px]'>
       <div className='px-6 py-4 flex justify-between'>
         <PostVoteClient
           postId={post.id}
@@ -62,15 +61,14 @@ const Post: FC<PostProps> = ({
           </a>
 
           <div
-            className='relative text-sm text-white max-h-full w-full  overflow-clip '
+            className='relative text-sm text-white max-h-full w-full overflow-clip '
             ref={pRef}>
             <EditorOutput content={post.content} />
-            
           </div>
         </div>
       </div>
 
-      <div className=' text-white rounded-lg z-20 text-sm px-4 py-4 sm:px-6'>
+      <div className='text-white rounded-lg z-20 text-sm px-4 py-4 sm:px-6'>
         <Link
           href={`/n/${subredditName}/post/${post.id}`}
           className='w-fit flex items-center gap-2'>
