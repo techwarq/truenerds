@@ -82,25 +82,27 @@ export default async function ProfilePage({ params: { username } }: ProfileProps
         </Tabs>
       </div>
 
-      <div className='mt-4 container'>
-        <h3 className='text-heading3-bold text-light-1'>Posts</h3>
-        {user.posts.length ? (
-          <ul className='mt-4'>
-            {user.posts.map((post) => (
-              <li key={post.id} className='mb-4'>
-                <Post
-                  post={post}
-                  votesAmt={post.votes.length}
-                  subredditName={post.subnerds.name}
-                  commentAmt={post.comments.length}
-                />
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className='text-base-medium text-gray-1'>No posts found.</p>
-        )}
-      </div>
+      <div className='mt-4'>
+  <h3 className='text-heading3-bold text-light-1'>Posts</h3>
+  {user.posts.length ? (
+    <ul className='mt-4 space-y-4'>
+      {user.posts.map((post) => (
+        <li key={post.id} className='mb-4'>
+          <div className='sm:w-full md:w-[550px] h-full mx-auto'>
+            <Post
+              post={post}
+              votesAmt={post.votes.length}
+              subredditName={post.subnerds.name}
+              commentAmt={post.comments.length}
+            />
+          </div>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p className='text-base-medium text-gray-1'>No posts found.</p>
+  )}
+</div>
     </div>
   );
 }
