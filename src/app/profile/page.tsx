@@ -42,7 +42,7 @@ export default async function ProfilePage({ params: { username } }: ProfileProps
   }
 
   return (
-    <div className='flex w-full text-green-600 flex-col justify-start'>
+    <div className='flex w-full flex-col justify-start text-green-600'>
       <div className='flex items-center justify-between'>
         <div className='flex items-center gap-3'>
           <div className='relative'>
@@ -61,33 +61,26 @@ export default async function ProfilePage({ params: { username } }: ProfileProps
       </div>
       <div className='mt-9'>
         <Tabs defaultValue='posts' className='w-full'>
-            <TabsList className='tab'>
-                {profileTabs.map((tab) =>(
-                    <TabsTrigger key={tab.label} value={tab.value} className='tab'>
-                        <Image src={tab.icon} alt={tab.label}
-                        width={24}
-                        height={24}
-                        className='object-contain'/>
-
-                        <p className='max-sm:hidden'>{tab.label}</p>
-                        {tab.label === 'Posts' &&(
-                            <p className='ml-1 rounded-sm bg-light-4 px-2 py-1 !text-tiny-medium text-green-600'>{user.posts.length }</p>
-                        )}
-
-                    </TabsTrigger>
-                ))}
-
-            </TabsList>
+          <TabsList className='tab'>
+            {profileTabs.map((tab) => (
+              <TabsTrigger key={tab.label} value={tab.value} className='tab'>
+                <Image src={tab.icon} alt={tab.label} width={24} height={24} className='object-contain' />
+                <p className='max-sm:hidden'>{tab.label}</p>
+                {tab.label === 'Posts' && (
+                  <p className='ml-1 rounded-sm bg-light-4 px-2 py-1 !text-tiny-medium text-green-600'>{user.posts.length}</p>
+                )}
+              </TabsTrigger>
+            ))}
+          </TabsList>
         </Tabs>
       </div>
-
       <div className='mt-4 w-full'>
         <h3 className='text-heading3-bold text-light-1'>Posts</h3>
         {user.posts.length ? (
           <ul className='mt-4 space-y-4 w-full'>
             {user.posts.map((post) => (
               <li key={post.id} className='w-full'>
-                <div className='w-full lg:max-w-[550px] mx-auto'>
+                <div className='w-full max-w-[600px] mx-auto'>
                   <Post
                     post={post}
                     votesAmt={post.votes.length}
