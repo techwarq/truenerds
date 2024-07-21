@@ -67,7 +67,7 @@ const Post: FC<PostProps> = ({
             <EditorOutput content={post.content} />
             {pRef.current?.clientHeight === 160 ? (
               // blur bottom if content is too long
-              <div className='absolute bottom-0 left-0 h-24 w-full '></div>
+              <div className='absolute bottom-0 left-0 h-full w-full '></div>
             ) : null}
           </div>
         </div>
