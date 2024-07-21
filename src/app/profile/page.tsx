@@ -80,7 +80,7 @@ export default async function ProfilePage({ params: { username } }: ProfileProps
           <ul className='mt-4 space-y-4 w-full'>
             {user.posts.map((post) => (
               <li key={post.id} className='w-full'>
-                <div className='w-full lg:max-w-[600px] mx-auto'>
+                <div className='w-full max-w-[600px] mx-auto'>
                   <Post
                     post={post}
                     votesAmt={post.votes.length}
