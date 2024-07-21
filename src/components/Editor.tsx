@@ -119,6 +119,7 @@ export const Editor: React.FC<EditorProps> = ({ subnerdsId }) => {
               },
             },
           },
+          
           list: List,
           code: Code,
           inlineCode: InlineCode,
