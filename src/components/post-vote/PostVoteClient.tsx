@@ -78,7 +78,7 @@ const PostVoteClient = ({
   })
 
   return (
-    <div className='flex flex-col gap-4 sm:gap-0 pr-6 sm:w-20 pb-4 sm:pb-0'>
+    <div className='flex flex-col items-center gap-2 pr-4 sm:pr-0 sm:w-12'>
       {/* upvote */}
       <Button
         onClick={() => vote('UP')}

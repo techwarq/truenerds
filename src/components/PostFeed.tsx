@@ -49,7 +49,7 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, subredditName }) => {
   const posts = (data?.pages.flatMap((page) => page) ?? initialPosts) as ExtendedPost[]
 
   return (
-    <ul className='flex flex-col col-span-2 space-y-6'>
+    <ul className='flex flex-col col-span-2 space-y-6 sm:w-full'>
       {posts.map((post, index) => {
         const votesAmt = post.votes.reduce((acc, vote) => {
           if (vote.type === 'UP') return acc + 1
@@ -64,7 +64,7 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, subredditName }) => {
         if (index === posts.length - 1) {
           // Add a ref to the last post in the list
           return (
-            <li key={post.id} ref={ref}>
+            <li key={post.id} ref={ref} className='w-full'>
               <Post
                 post={post}
                 commentAmt={post.comments.length}
@@ -76,7 +76,7 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, subredditName }) => {
           )
         } else {
           return (
-            <li key={post.id}>
+            <li key={post.id} className='w-full'>
               <Post
                 post={post}
                 commentAmt={post.comments.length}

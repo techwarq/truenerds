@@ -32,7 +32,7 @@ const Post: FC<PostProps> = ({
   const pRef = useRef<HTMLParagraphElement>(null)
 
   return (
-    <div className='rounded-xl bg-white/20 shadow md:max-w-screen '>
+    <div className='rounded-xl bg-white/20 shadow sm:max-w-screen sm:w-full'>
       <div className='px-6 py-4 flex justify-between'>
         <PostVoteClient
           postId={post.id}
@@ -40,7 +40,7 @@ const Post: FC<PostProps> = ({
           initialVote={_currentVote?.type}
         />
 
-        <div className='w-0 flex-1'>
+        <div className='w-0 flex-1 '>
           <div className='max-h-40 mt-1 text-xs text-white'>
             {subredditName ? (
               <>
@@ -62,13 +62,10 @@ const Post: FC<PostProps> = ({
           </a>
 
           <div
-            className='relative text-sm text-white max-h-40 w-full overflow-clip '
+            className='relative text-sm text-white max-h-full w-full  overflow-clip '
             ref={pRef}>
             <EditorOutput content={post.content} />
-            {pRef.current?.clientHeight === 160 ? (
-              // blur bottom if content is too long
-              <div className='absolute bottom-0 left-0 h-full w-full '></div>
-            ) : null}
+            
           </div>
         </div>
       </div>
