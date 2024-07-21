@@ -29,7 +29,7 @@ export default function RootLayout({
         
         <main className='flex flex-row'>
             <LeftSidebar />
-        <section className='main-container'>
+        <section className=''>
         <div className='  max-w-screen mx-auto h-full pt-12 '>  {children}
 
         </div>
